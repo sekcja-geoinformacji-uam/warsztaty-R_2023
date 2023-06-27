@@ -9,8 +9,8 @@ iris |> select(contains("Sepal"))
 
 # wybieranie wierszy
 mtcars |> slice(1:10)
-iris |> slice_min(Petal.Length, n = 5)
-iris |> slice_sample(n = 20)
+iris |> slice_min(Petal.Length, n = 2)
+iris |> slice_sample(prop = 0.5)
 
 # filtrowanie
 iris |> filter(Sepal.Width > 4)
@@ -46,7 +46,7 @@ iris |> relocate(Species, .before = Sepal.Length)
 
 # zmiana nazw kolumn
 iris |> rename(sepal_length = Sepal.Length)
-iris |> rename_with(tolower)
+iris |> rename_with(tolower, starts_with("Sepal"))
 iris |>
   rename_with(
     ~paste0("X_", .x),
