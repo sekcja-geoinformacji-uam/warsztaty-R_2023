@@ -19,6 +19,7 @@ powiaty = powiaty |>
     by = c("jpt_kod_je" = "Kod")
   ) |>
   rename(bezrobocie = ogółem)
+#rename(left_join(powiaty, select(bezrob, Kod, ogółem), by = c("jpt_kod_je" = "Kod")))
 powiaty["bezrobocie"] |> plot()
 
 # obliczenie średniego bezrobocia oraz powierzchni dla województw
@@ -31,6 +32,7 @@ powiaty |>
   ) |>
   select(bezrobocie) |>
   plot()
+#plot(select(summarise(group_by(mutate(powiaty, woj = substr(jpt_kod_je, 1, 2)), woj), geom = st_union(geom), bezrobocie = mean(bezrobocie)), bezrobocie))
 
 powiaty |>
   mutate(woj = substr(jpt_kod_je, 1, 2)) |>
